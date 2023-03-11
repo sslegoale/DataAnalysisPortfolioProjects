@@ -1,0 +1,198 @@
+-- 1. SHOW ALL COLUMNS AND ROWS IN THE TABLE
+
+SELECT *
+
+FROM salaries;
+
+
+
+-- 2. SHOW ONLY THE EmployeeName AND JobTitle COLUMNS
+
+SELECT EmployeeName, JobTitle
+
+FROM salaries;
+
+-- 
+
+3. SHOW THE NUMBER OF EMPLOYEES IN THE TABLE
+
+SELECT COUNT(*)
+
+FROM salaries;
+
+
+
+-- 4. SHOW UNIQUE JOB TITLES IN THE TABLE
+
+SELECT DISTINCT JobTitle
+
+FROM salaries;
+
+
+
+-- 5. SHOW THE JOB TITLE AND OVERTIME PAY FOR ALL EMPLOYEES WITH OVERTIME PAY OF OVER 1000
+
+SELECT JobTitle, OvertimePay
+
+FROM salaries
+
+WHERE OvertimePay > 1000;
+
+
+
+-- 6. SHOW THE AVERAGE BASE PAY FOR ALL EMPLOYEES
+
+SELECT AVG(BasePay) AS "Average Base Pay"
+
+FROM salaries;
+
+
+
+-- 7. SHOW THE TOP 10 HIGHEST PAID EMPLOYEES
+
+SELECT EmployeeName, JobTitle, TotalPay
+
+FROM salaries
+
+ORDER BY TotalPay DESC
+
+LIMIT 10;
+
+
+
+-- 8. SHOW THE AVERAGE OF BASE PAY, OVERTIME PAY AND OTHER PAY FOR EACH EMPLOYEE
+
+SELECT EmployeeName, (BasePay + OvertimePay + OtherPay)/3 AS "Average Base, Overtime & Pay"
+
+FROM salaries;
+
+
+
+SELECT EmployeeName, (TotalPay) AS "Average Total Pay"
+
+FROM salaries;
+
+
+
+SELECT EmployeeName, (BasePay + OvertimePay + OtherPay) AS BOO, TotalPay
+
+FROM salaries;
+
+
+
+-- 9. SHOW ALL EMPLOYEES WHO HAVE THE WORD "MANAGER" IN THE JOB TITLE
+
+SELECT EmployeeName, JobTitle
+
+FROM salaries
+
+WHERE JobTitle LIKE "%Manager%";
+
+
+
+-- 10. SHOW ALL EMPLOYEES WITH JOB TITLE NOT EQUAL TO "MANAGER"
+
+SELECT EmployeeName, JobTitle
+
+FROM salaries
+
+WHERE JobTitle != "Manager";
+
+
+
+-- 11. SHOW ALL EMPLOYEES WITH TOTAL PAY BETWEEN 50 000 AND 75 000
+
+SELECT EmployeeName, TotalPay
+FROM salaries
+
+WHERE TotalPay >= 50000 AND TotalPay <= 75000
+
+ORDER BY TotalPay ASC;
+
+
+
+-- 12. SHOW ALL EMPLOYEES WITH BASE PAY OF LESS THAN 50000, OR TOTAL PAY OF MORE THAN 100000
+
+SELECT EmployeeName, BasePay, TotalPay
+
+FROM salaries
+
+WHERE BasePay < 50000 OR TotalPay > 100000;
+
+
+
+-- 13. SHOW ALL EMPLOYEES WITH A TOTAL PAY BENEFITS VALUE BETWEEN 125000 AND 150000 AND A JOB TITLE CONTAINING THE WORD "DIRECTOR"
+
+SELECT EmployeeName, JobTitle, TotalPayBenefits
+
+FROM salaries
+
+WHERE TotalPayBenefits BETWEEN 125000 AND 150000 AND JobTitle LIKE "%Director%";
+
+
+
+-- 14. SHOW ALL EMPLOYEES BY THEIR TOTAL PAY BENEFITS IN DESCENDING ORDER
+
+SELECT EmployeeName, TotalPayBenefits
+
+FROM salaries
+
+ORDER BY TotalPayBenefits DESC;
+
+
+
+-- 15. SHOW ALL JOB TITLES WITH AN AVERAGE BASE PAY OF AT LEAST 100000 AND ORDER THEM BY AVERAGE BASE PAY IN DESCENDING ORDER
+
+SELECT JobTitle, AVG(BasePay) AS AVGBP
+
+FROM salaries
+
+GROUP BY JobTitle
+
+HAVING AVGBP >= 100000
+
+ORDER BY AVGBP DESC;
+
+
+
+-- 16. DELETE THE NOTES COLUMN FROM THE TABLE SALARIES
+
+ALTER TABLE salaries
+
+DROP COLUMN Notes;
+
+
+
+-- 17. UPDATE THE BASE PAY OF ALL EMPLOYEES WITH JOB TITLE CONTAINING "MANAGER" BY INCREASING BY 10%
+
+UPDATE salaries
+
+SET BasePay = BasePay * 1.1
+
+WHERE JobTitle LIKE "%Manager%";
+
+
+
+SELECT *
+
+FROM salaries
+
+WHERE JobTitle LIKE "%Manager%";
+
+
+
+-- 18. DELETE ALL EMPLOYEES WITH NO OVERTIME PAY
+
+DELETE FROM salaries
+
+WHERE OvertimePay = 0;
+
+
+
+SELECT *
+
+FROM salaries
+
+WHERE OvertimePay = 0;
+
+
